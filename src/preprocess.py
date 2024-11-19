@@ -107,6 +107,7 @@ if __name__ == '__main__':
     args_parser.add_argument('--verbose', type=bool, default=True, help="Enable verbose logging")
     args_parser.add_argument('--use_value_description', type=bool, default=True, help="Include value descriptions")
 
+
     args = args_parser.parse_args()
 
     # Process all databases or a single database
