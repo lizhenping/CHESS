@@ -26,6 +26,7 @@ def execute_sql(db_path: str, sql: str, fetch: Union[str, int] = "all", timeout:
 
         def run(self):
             try:
+                print("SQL DB Path:", db_path)
                 with sqlite3.connect(db_path, timeout=60) as conn:
                     cursor = conn.cursor()
                     cursor.execute(sql)
