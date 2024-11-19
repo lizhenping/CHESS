@@ -120,13 +120,15 @@ class RunManager:
         team = build_team(self.args.config)
         thread_id = f"{self.args.run_start_time}_{task.db_id}_{task.question_id}"
         thread_config = {"configurable": {"thread_id": thread_id}}
-        state_values =  SystemState(task=task, 
+        state_values =  SystemState(task=task,
                                     tentative_schema=DatabaseManager().get_db_schema(), 
                                     execution_history=[])
         thread_config["recursion_limit"] = 50
         for state_dict in team.stream(state_values, thread_config, stream_mode="values"):
             logger.log("________________________________________________________________________________________")
+            print(state_dict)
             continue
+        print("Done")
         system_state = SystemState(**state_dict)
         return system_state, task.db_id, task.question_id
 

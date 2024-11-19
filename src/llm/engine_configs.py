@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_anthropic import ChatAnthropic
 from langchain_google_vertexai import VertexAI
+from langchain_community.chat_models import ChatTongyi
 from google.oauth2 import service_account
 from google.cloud import aiplatform
 from typing import Dict, Any
@@ -89,9 +90,13 @@ ENGINE_CONFIGS: Dict[str, Dict[str, Any]] = {
         "constructor": ChatOpenAI,
         "params": {"model": "gpt-4o", "temperature": 0}
     },
+    "qwen-plus": {
+        "constructor":ChatTongyi,
+        "params": {"model": "qwen-plus", "temperature": 0}
+    },
     "gpt-4o-mini": {
         "constructor": ChatOpenAI,
-        "params": {"model": "gpt-4o-mini", "temperature": 0}
+        "params": {"model": "gpt-4o-mini", "temperature": 0,"api_key": os.getenv("DASHSCOPE_API_KEY")}
     },
     "claude-3-opus-20240229": {
         "constructor": ChatAnthropic,
