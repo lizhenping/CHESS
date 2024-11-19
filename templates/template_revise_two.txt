@@ -24,7 +24,7 @@ Question:
 {QUESTION}
 
 Hint:
-{EVIDENCE}
+{HINT}
 
 Predicted query:
 {SQL}

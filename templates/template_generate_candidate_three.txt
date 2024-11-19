@@ -20,6 +20,7 @@ Database admin instructions:
 8. Never use || to concatenate columns in the SELECT. Rather output the columns as they are.
 9. If you are joining multiple tables, make sure to use alias names for the tables and use the alias names to reference the columns in the query. Use T1, T2, T3, ... as alias names.
 10. If you are doing a logical operation on a column, such as mathematical operations and sorting, make sure to filter null values within those columns.
+11. Don't use * in the SELECT clause, unless it is explicitly asked in the question.
 
 ###
 Question: 

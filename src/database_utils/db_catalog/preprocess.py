@@ -5,11 +5,16 @@ from dotenv import load_dotenv
 from langchain_chroma import Chroma
 from langchain.schema.document import Document
 from langchain_openai import OpenAIEmbeddings
+from langchain_google_vertexai import VertexAIEmbeddings
+from google.oauth2 import service_account
+from google.cloud import aiplatform
+import vertexai
 
 from database_utils.db_catalog.csv_utils import load_tables_description
 from database_utils.zhipu_embedding import ZhipuAIEmbeddings
 load_dotenv(override=True)
 
+<<<<<<< HEAD
 
 
 # 初始化嵌入（如果尚未初始化）
@@ -18,6 +23,24 @@ EMBEDDING_FUNCTION = ZhipuAIEmbeddings(
     api_key=os.getenv("ZHIPU_API_KEY"),
     dimensions=1024
 )
+=======
+GCP_PROJECT = os.getenv("GCP_PROJECT")
+GCP_REGION = os.getenv("GCP_REGION")
+GCP_CREDENTIALS = os.getenv("GCP_CREDENTIALS")
+
+if GCP_CREDENTIALS and GCP_PROJECT and GCP_REGION:
+    aiplatform.init(
+    project=GCP_PROJECT,
+    location=GCP_REGION,
+    credentials=service_account.Credentials.from_service_account_file(GCP_CREDENTIALS)
+    )
+    vertexai.init(project=GCP_PROJECT, location=GCP_REGION, credentials=service_account.Credentials.from_service_account_file(GCP_CREDENTIALS))
+
+
+# EMBEDDING_FUNCTION = VertexAIEmbeddings(model_name="text-embedding-004")#OpenAIEmbeddings(model="text-embedding-3-large")
+EMBEDDING_FUNCTION = OpenAIEmbeddings(model="text-embedding-3-large")
+>>>>>>> 3d6e835f858d26885d21d4bc0215aeecf855efbe
+
 
 def make_db_context_vec_db(db_directory_path: str, **kwargs) -> None:
     """

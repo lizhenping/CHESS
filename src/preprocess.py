@@ -108,7 +108,20 @@ if __name__ == '__main__':
     args_parser.add_argument('--use_value_description', type=bool, default=True, help="Include value descriptions")
 
 
+<<<<<<< HEAD
     args = args_parser.parse_args()
+=======
+    if args.db_id == 'all':
+        with multiprocessing.Pool(NUM_WORKERS) as pool:
+            for db_id in os.listdir(args.db_root_directory):
+                # check if the db_id is a directory
+                if os.path.isdir(f"{args.db_root_directory}/{db_id}"):
+                    pool.apply_async(worker_initializer, args=(db_id, args))
+            pool.close()
+            pool.join()
+    else:
+        worker_initializer(args.db_id, args)
+>>>>>>> 3d6e835f858d26885d21d4bc0215aeecf855efbe
 
     # Process all databases or a single database
     print(args.db_id)
